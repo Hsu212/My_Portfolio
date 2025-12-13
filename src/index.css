@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .container {
+    @apply max-w-6xl mx-auto px-6;
+  }
+  .section {
+    @apply py-20;
+  }
+  .btn-primary {
+    @apply px-8 py-4 bg-primary hover:bg-sky-600 text-white rounded-full font-medium transition transform hover:scale-105;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+@keyframes rotate-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.animate-rotate-gradient {
+  animation: rotate-gradient 6s linear infinite;
+}
+
+@keyframes rotate-conic {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rotate-conic {
+  animation: rotate-conic 8s linear infinite;
+}
+
+.bg-conic-gradient {
+  background: conic-gradient(from 0deg, #0ea5e9, #8b5cf6, #0ea5e9);
+}
+/* Custom Cursor Styles */
+/*.cursor-hover {
+  cursor: none;  
+}*/
+
+/*body {
+  cursor: none; 
+}*/
+
+/* If you prefer to keep default cursor elsewhere and only hide on text: */
+/*
+body * {
+  cursor: default;
+}
+.cursor-hover {
+  cursor: none;
+}
+*/
+
+/* Improve performance */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
