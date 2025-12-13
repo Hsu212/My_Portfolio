@@ -9,30 +9,7 @@ export function Contact() {
   ];
 
   return (
-    <section id="contact" className="relative py-32 overflow-hidden bg-black section">
-      {/* Consistent futuristic background orbs */}
-      <div className="absolute inset-0">
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full w-96 h-96 bg-gradient-to-r from-purple-600/20 via-cyan-600/20 to-pink-600/20 blur-3xl"
-            animate={{
-              x: [0, 120, -120, 0],
-              y: [0, -80, 80, 0],
-            }}
-            transition={{
-              duration: 18 + i * 6,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            style={{
-              left: `${15 + 20 * i}%`,
-              top: `${20 + 15 * (i % 2)}%`,
-            }}
-          />
-        ))}
-      </div>
-
+    <section id="contact" className="relative py-32 overflow-hidden bg-transparent section">
       <div className="container relative z-10 text-center">
         <motion.h2
           whileInView={{ opacity: 1, y: 0 }}
@@ -69,7 +46,6 @@ export function Contact() {
 
         <div className="flex justify-center gap-12">
           {socials.map(({ icon: Icon, link, color }, i) => {
-            const isFilledIcon = Icon === Facebook || Icon === Linkedin;
             const isGithub = Icon === Github;
 
             return (
@@ -87,13 +63,8 @@ export function Contact() {
               >
                 <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${color} opacity-0 group-hover:opacity-60 blur-xl transition-opacity duration-700`} />
                 <Icon 
-                  className={`relative w-10 h-10 transition-all duration-500 group-hover:drop-shadow-lg ${
-                    isFilledIcon
-                      ? "text-gray-400 fill-gray-400 group-hover:text-transparent group-hover:fill-transparent"
-                      : isGithub
-                      ? "text-gray-400 fill-gray-400 group-hover:text-transparent group-hover:fill-transparent"
-                      : "text-transparent"
-                  } bg-gradient-to-r ${color} bg-clip-text`}
+                  // FIXED: Removed "group-hover:text-transparent" and "group-hover:fill-transparent"
+                  className={`relative w-10 h-10 transition-all duration-500 text-gray-400 group-hover:text-white group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]`}
                   strokeWidth={isGithub ? 1.5 : 2}
                 />
               </motion.a>
