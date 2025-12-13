@@ -4,16 +4,21 @@ import { About } from "./components/About";
 import { Projects } from "./components/Projects";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
+import { Background3D } from "./components/Background3D"; 
 
 function App() {
   return (
-    <div className="min-h-screen text-gray-900 transition-colors duration-300 bg-white dark:bg-gray-950 dark:text-gray-100">
-      <Navbar />
-      <Hero />
-      <About />
-      <Projects />
-      <Contact />
-      <Footer />
+    // Ensure bg-transparent is set here
+    <div className="relative min-h-screen text-gray-100 bg-transparent">
+      <Background3D /> 
+      <div className="relative z-10">
+        <Navbar />
+        <Hero />
+        <About />
+        <Projects />
+        <Contact />
+        <Footer />
+      </div>
     </div>
   );
 }
