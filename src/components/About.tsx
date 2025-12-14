@@ -88,11 +88,7 @@ export function About() {
             transition={{ delay: 0.8, duration: 1.2 }}
             className="max-w-3xl mx-auto mt-6 text-lg text-gray-400 lg:text-xl"
           >
-            {description.split("").map((letter, i) => (
-              <motion.span key={i} custom={i + heading.length} variants={letterVariants} className="inline-block">
-                {letter === " " ? "\u00A0" : letter}
-              </motion.span>
-            ))}
+           
           </motion.p>
         </motion.div>
 
@@ -191,4 +187,3 @@ export function About() {
     </section>
   );
 }
-
