@@ -44,8 +44,7 @@ const item = {
 
 export function About() {
   const heading = "About Me";
-  const description = "A passionate frontend developer crafting pixel-perfect, delightful experiences with modern web technologies.";
-
+  
   // Modern gradient palette that cycles nicely
   const gradients = [
     "from-primary/30 to-purple-600/40",
@@ -192,3 +191,4 @@ export function About() {
     </section>
   );
 }
+
