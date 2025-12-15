@@ -140,7 +140,7 @@ export function Projects() {
       github: "https://github.com/Hsu212/PLATE.AI" 
     },
     { 
-      title: "E-Commerce", 
+      title: "SM Home E-Commerce Website", 
       desc: "A Furniture store", 
       tags: ["React", "TypeScript", "CSS"], 
       image: "https://github.com/Hsu212/My_Portfolio/blob/main/src/assets/SMHome.png?raw=true", 
@@ -148,7 +148,7 @@ export function Projects() {
       github: "https://github.com/Hsu212/SMHome_Furniture_Store_Ecommerce_Website" 
     },
     { 
-      title: "E-Learning", 
+      title: "Free2Learn E-Learning System", 
       desc: "Free Online Learning Website For Languages", 
       tags: ["Vue", "JavaScript", "HTML", "CSS"], 
       image: "https://github.com/Hsu212/Free2Learn_E-Learning_System/blob/main/public/F2L.png?raw=true", 
