@@ -38,7 +38,7 @@ export function Contact() {
   ];
 
   return (
-    <section id="contact" className="relative py-32 overflow-hidden bg-transparent">
+    <section id="contact" className="relative py-20 lg:py-24 overflow-hidden bg-transparent">
       {/* Background 3D Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
@@ -48,7 +48,7 @@ export function Contact() {
             opacity: [0.1, 0.2, 0.1] 
           }}
           transition={{ duration: 20, repeat: Infinity }}
-          className="absolute top-1/4 -left-20 w-96 h-96 bg-primary blur-[120px] rounded-full"
+          className="absolute top-1/4 -left-20 w-64 h-64 lg:w-96 lg:h-96 bg-primary blur-[120px] rounded-full"
         />
         <motion.div 
           animate={{ 
@@ -57,7 +57,7 @@ export function Contact() {
             opacity: [0.1, 0.2, 0.1] 
           }}
           transition={{ duration: 25, repeat: Infinity }}
-          className="absolute bottom-1/4 -right-20 w-96 h-96 bg-secondary blur-[120px] rounded-full"
+          className="absolute bottom-1/4 -right-20 w-64 h-64 lg:w-96 lg:h-96 bg-secondary blur-[120px] rounded-full"
         />
       </div>
 
@@ -67,9 +67,9 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-12 lg:mb-16"
         >
-          <h2 className="text-5xl font-black text-white md:text-7xl mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6">
             Let's <span className="text-transparent bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text">Connect</span>
           </h2>
           <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
@@ -91,7 +91,7 @@ export function Contact() {
             {/* Main Contact Card */}
             <div 
               style={{ transform: "translateZ(50px)" }}
-              className="relative p-12 md:p-16 bg-gray-900/40 backdrop-blur-2xl border border-white/10 rounded-[3rem] shadow-2xl overflow-hidden"
+              className="relative p-10 md:p-16 bg-gray-900/40 backdrop-blur-2xl border border-white/10 rounded-[3rem] shadow-2xl overflow-hidden"
             >
               {/* Internal Shine */}
               <motion.div 
@@ -103,12 +103,12 @@ export function Contact() {
               <div className="relative z-10 text-center">
                 <motion.div 
                   style={{ transform: "translateZ(80px)" }}
-                  className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-primary/10 mb-8 border border-primary/20"
+                  className="inline-flex items-center justify-center w-16 h-16 lg:w-20 lg:h-20 rounded-3xl bg-primary/10 mb-6 lg:mb-8 border border-primary/20"
                 >
-                  <Mail className="w-10 h-10 text-primary" />
+                  <Mail className="w-8 h-8 lg:w-10 lg:h-10 text-primary" />
                 </motion.div>
 
-                <h3 style={{ transform: "translateZ(60px)" }} className="text-3xl font-bold text-white mb-8">
+                <h3 style={{ transform: "translateZ(60px)" }} className="text-xl md:text-3xl font-bold text-white mb-8 break-all">
                   kienbrown76@gmail.com
                 </h3>
 
@@ -117,14 +117,14 @@ export function Contact() {
                   whileHover={{ scale: 1.05, y: -5 }}
                   whileTap={{ scale: 0.95 }}
                   style={{ transform: "translateZ(70px)" }}
-                  className="relative inline-flex items-center gap-3 px-10 py-5 bg-primary text-white font-black rounded-2xl group overflow-hidden transition-all shadow-lg shadow-primary/20"
+                  className="relative inline-flex items-center gap-3 px-8 py-4 lg:px-10 lg:py-5 bg-primary text-white font-black rounded-2xl group overflow-hidden transition-all shadow-lg shadow-primary/20"
                 >
                   <span className="relative z-10">Send a Message</span>
                   <Send className="relative z-10 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </motion.a>
 
-                <div className="mt-16 pt-10 border-t border-white/5 flex flex-wrap justify-center gap-6" style={{ transform: "translateZ(40px)" }}>
+                <div className="mt-12 lg:mt-16 pt-8 lg:pt-10 border-t border-white/5 flex flex-wrap justify-center gap-4 lg:gap-6" style={{ transform: "translateZ(40px)" }}>
                   {socials.map((social, i) => (
                     <motion.a
                       key={i}
