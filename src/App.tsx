@@ -54,7 +54,8 @@ function App() {
   };
 
   return (
-    <div className="relative min-h-screen text-gray-100 bg-gray-950 selection:bg-primary/30">
+    // FIX 3: Added 'overflow-x-hidden' and 'w-full' to prevent horizontal scroll issues
+    <div className="relative min-h-screen w-full overflow-x-hidden text-gray-100 bg-gray-950 selection:bg-primary/30">
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-500 to-secondary z-[100] origin-left"
         style={{ scaleX }}
