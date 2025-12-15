@@ -1,100 +1,179 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Github, Linkedin, Mail } from "lucide-react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   const navItems = ["About", "Projects", "Contact"];
 
+  // Scroll Spy Logic
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["about", "projects", "contact"];
+      const currentSection = sections.find((section) => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top >= -300 && rect.top <= 300;
+        }
+        return false;
+      });
+
+      if (currentSection) {
+        setActiveSection(currentSection);
+      } else if (window.scrollY < 100) {
+        setActiveSection("");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isOpen]);
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
-      {/* Subtle animated background orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(3)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full w-72 h-72 bg-gradient-to-r from-primary/10 to-secondary/10 blur-3xl"
-            animate={{
-              x: [0, 80, -80, 0],
-              y: [0, -40, 40, 0],
-            }}
-            transition={{
-              duration: 15 + i * 4,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            style={{ left: `${30 * (i + 1)}%`, top: "20%" }}
-          />
-        ))}
-      </div>
-
-      {/* Main glass navbar - now pure dark style */}
       <div className="relative border-b border-white/10 bg-gray-950/80 backdrop-blur-2xl">
-        <div className="absolute inset-0 opacity-40 bg-gradient-to-r from-primary/10 via-purple-500/5 to-secondary/10" />
-        
-        <div className="container relative flex items-center justify-between px-6 py-6 mx-auto max-w-7xl">
+        <div className="container relative flex items-center justify-between px-6 py-5 mx-auto max-w-7xl">
           <motion.a
             href="#"
             whileHover={{ scale: 1.05 }}
-            className="text-4xl font-black text-transparent bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text"
+            className="text-3xl font-black text-transparent bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text"
           >
             hmwm
           </motion.a>
 
           {/* Desktop Navigation */}
           <div className="items-center hidden gap-12 md:flex">
-            {navItems.map((item) => (
-              <motion.a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                whileHover={{ y: -2 }}
-                className="relative text-lg font-medium text-gray-200 transition-all duration-300 hover:text-primary"
-              >
-                {item}
-                <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-gradient-to-r from-primary to-secondary transition-all duration-500 hover:w-full" />
-              </motion.a>
-            ))}
+            {navItems.map((item) => {
+              const lowerItem = item.toLowerCase();
+              const isActive = activeSection === lowerItem;
+              return (
+                <motion.a
+                  key={item}
+                  href={`#${lowerItem}`}
+                  className={`relative text-lg font-medium transition-colors duration-300 ${
+                    isActive ? "text-primary" : "text-gray-200 hover:text-primary"
+                  }`}
+                >
+                  {item}
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-indicator"
+                      className="absolute -bottom-2 left-0 right-0 h-1 rounded-full bg-gradient-to-r from-primary to-secondary"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </motion.a>
+              );
+            })}
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          {/* Mobile Menu Toggle Button */}
+          <div className="z-50 md:hidden">
             <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.9 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="p-3 transition-all border rounded-full bg-white/5 backdrop-blur-md border-white/20 hover:border-primary/60 hover:shadow-lg hover:shadow-primary/30"
+              className="relative p-2 overflow-hidden border rounded-xl bg-white/5 border-white/20"
             >
-              {isOpen ? <X className="w-7 h-7 text-primary" /> : <Menu className="w-7 h-7 text-primary" />}
+              <AnimatePresence mode="wait">
+                {isOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                  >
+                    <X className="w-8 h-8 text-primary" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                  >
+                    <Menu className="w-8 h-8 text-primary" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Modern Full-Screen Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute inset-x-0 border-b top-full bg-gray-950/90 backdrop-blur-2xl border-white/10 md:hidden"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-40 flex flex-col bg-gray-950 md:hidden"
           >
-            <div className="container px-6 py-12 mx-auto space-y-8 text-center max-w-7xl">
-              {navItems.map((item, i) => (
-                <motion.a
-                  key={item}
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  href={`#${item.toLowerCase()}`}
-                  onClick={() => setIsOpen(false)}
-                  className="block text-3xl font-bold text-transparent transition-all duration-500 bg-gradient-to-r from-primary to-secondary bg-clip-text hover:from-secondary hover:to-purple-400"
-                >
-                  {item}
-                </motion.a>
-              ))}
+            {/* Animated Background for Mobile Menu */}
+            <div className="absolute inset-0 opacity-20 pointer-events-none">
+              <div className="absolute top-[-10%] right-[-10%] w-[80%] h-[40%] bg-primary/30 blur-[120px] rounded-full" />
+              <div className="absolute bottom-[-10%] left-[-10%] w-[80%] h-[40%] bg-secondary/30 blur-[120px] rounded-full" />
             </div>
+
+            <div className="relative flex flex-col items-center justify-center flex-grow px-6 space-y-10 text-center">
+              {navItems.map((item, i) => {
+                const lowerItem = item.toLowerCase();
+                const isActive = activeSection === lowerItem;
+                return (
+                  <motion.a
+                    key={item}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * i + 0.2 }}
+                    href={`#${lowerItem}`}
+                    onClick={() => setIsOpen(false)}
+                    className="relative group"
+                  >
+                    <span className={`text-5xl font-black tracking-tighter transition-all duration-300 ${
+                      isActive 
+                        ? "text-white" 
+                        : "text-gray-600 group-hover:text-gray-300"
+                    }`}>
+                      {item}
+                    </span>
+                    {isActive && (
+                      <motion.div 
+                        layoutId="activeCircle"
+                        className="absolute -left-8 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-primary"
+                      />
+                    )}
+                  </motion.a>
+                );
+              })}
+            </div>
+
+            {/* Mobile Footer (Socials) */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="relative p-12 border-t border-white/10 bg-white/5 backdrop-blur-xl"
+            >
+              <div className="flex justify-center gap-8">
+                <a href="https://github.com/Hsu212" className="text-gray-400 hover:text-primary transition-colors"><Github /></a>
+                <a href="https://www.linkedin.com/in/hsu-maung-373216393/" className="text-gray-400 hover:text-primary transition-colors"><Linkedin /></a>
+                <a href="mailto:kienbrown76@gmail.com" className="text-gray-400 hover:text-primary transition-colors"><Mail /></a>
+              </div>
+              <p className="mt-6 text-sm text-center text-gray-500">Available for collaborations</p>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
