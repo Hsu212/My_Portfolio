@@ -8,10 +8,10 @@ function ProjectCard({ project }: { project: any }) {
 
   return (
     <div 
-      className="relative h-[480px] w-full perspective-2000 cursor-pointer"
+      className="relative h-[420px] lg:h-[480px] w-full perspective-2000 cursor-pointer"
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
-      onClick={() => setIsFlipped(!isFlipped)} // Support for mobile tap
+      onClick={() => setIsFlipped(!isFlipped)} 
     >
       <motion.div
         className="relative w-full h-full transition-all"
@@ -43,7 +43,6 @@ function ProjectCard({ project }: { project: any }) {
                 target.parentElement!.classList.add('bg-gradient-to-br', 'from-gray-800', 'to-black');
               }}
             />
-            {/* Dynamic Shine overlay */}
             <motion.div 
               className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none"
               animate={{ x: isFlipped ? 200 : -200 }}
@@ -52,9 +51,9 @@ function ProjectCard({ project }: { project: any }) {
             
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
             
-            <div className="absolute bottom-10 left-10 right-10">
+            <div className="absolute bottom-8 left-8 right-8 lg:bottom-10 lg:left-10 lg:right-10">
               <motion.h3 
-                className="text-4xl font-black text-white mb-3 tracking-tight"
+                className="text-3xl lg:text-4xl font-black text-white mb-3 tracking-tight"
                 style={{ transform: "translateZ(50px)" }}
               >
                 {project.title}
@@ -69,47 +68,46 @@ function ProjectCard({ project }: { project: any }) {
 
         {/* BACK SIDE */}
         <div 
-          className="absolute inset-0 w-full h-full rounded-[2.5rem] border-2 border-white/10 bg-[#0a0a0c] p-12 flex flex-col justify-between shadow-2xl"
+          className="absolute inset-0 w-full h-full rounded-[2.5rem] border-2 border-white/10 bg-[#0a0a0c] p-8 lg:p-12 flex flex-col justify-between shadow-2xl"
           style={{ 
             backfaceVisibility: "hidden", 
             transform: "rotateY(180deg)" 
           }}
         >
-          {/* Decorative Background Glow */}
           <div className="absolute top-0 left-0 w-full h-full bg-primary/5 blur-3xl rounded-full -z-10" />
 
           <div>
-            <h3 className="text-3xl font-black text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text mb-6">
+            <h3 className="text-2xl lg:text-3xl font-black text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text mb-4 lg:mb-6">
               {project.title}
             </h3>
-            <p className="text-gray-400 text-lg leading-relaxed mb-8 font-medium">
+            <p className="text-gray-400 text-base lg:text-lg leading-relaxed mb-6 lg:mb-8 font-medium">
               {project.desc}
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2 lg:gap-3">
               {project.tags.map((tag: string) => (
-                <span key={tag} className="px-4 py-1.5 text-[11px] font-bold tracking-widest uppercase border border-white/5 rounded-xl bg-white/5 text-cyan-300">
+                <span key={tag} className="px-3 py-1 lg:px-4 lg:py-1.5 text-[10px] lg:text-[11px] font-bold tracking-widest uppercase border border-white/5 rounded-xl bg-white/5 text-cyan-300">
                   {tag}
                 </span>
               ))}
             </div>
           </div>
 
-          <div className="flex items-center justify-between pt-8 border-t border-white/5">
+          <div className="flex items-center justify-between pt-6 lg:pt-8 border-t border-white/5">
             <motion.a
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05, x: 5 }}
               whileTap={{ scale: 0.95 }}
-              className={`flex items-center gap-2 text-lg font-bold transition-all ${
+              className={`flex items-center gap-2 text-base lg:text-lg font-bold transition-all ${
                 project.live === "#" ? "opacity-20 cursor-not-allowed text-gray-500" : "text-primary hover:text-white"
               }`}
               onClick={(e) => {
-                e.stopPropagation(); // Prevent flipping when clicking links
+                e.stopPropagation(); 
                 if (project.live === "#") e.preventDefault();
               }}
             >
-              <ExternalLink className="w-5 h-5" />
+              <ExternalLink className="w-4 h-4 lg:w-5 lg:h-5" />
               Live Demo
             </motion.a>
             <motion.a
@@ -118,10 +116,10 @@ function ProjectCard({ project }: { project: any }) {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05, x: -5 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 text-lg font-bold text-gray-500 hover:text-white transition-all"
+              className="flex items-center gap-2 text-base lg:text-lg font-bold text-gray-500 hover:text-white transition-all"
               onClick={(e) => e.stopPropagation()}
             >
-              <Github className="w-5 h-5" />
+              <Github className="w-4 h-4 lg:w-5 lg:h-5" />
               Code
             </motion.a>
           </div>
@@ -143,11 +141,19 @@ export function Projects() {
     },
     { 
       title: "E-Commerce", 
-      desc: "Full-stack online store with Stripe & Prisma integration for seamless payments and premium furniture browsing experience.", 
-      tags: ["React", "TypeScript", "CSS", "Prisma"], 
+      desc: "A Furniture store", 
+      tags: ["React", "TypeScript", "CSS"], 
       image: "https://github.com/Hsu212/My_Portfolio/blob/main/src/assets/SMHome.png?raw=true", 
       live: "https://furniture-store-ecommerce-website.vercel.app/", 
       github: "https://github.com/Hsu212/SMHome_Furniture_Store_Ecommerce_Website" 
+    },
+    { 
+      title: "E-Learning", 
+      desc: "Free Online Learning Website For Languages", 
+      tags: ["Vue", "JavaScript", "HTML", "CSS"], 
+      image: "https://github.com/Hsu212/Free2Learn_E-Learning_System/blob/main/public/F2L.png?raw=true", 
+      live: "https://freeto2learn.netlify.app/", 
+      github: "https://github.com/Hsu212/Free2Learn_E-Learning_System" 
     },
     { 
       title: "Riverpod Tasker", 
@@ -168,22 +174,22 @@ export function Projects() {
   ];
 
   return (
-    <section id="projects" className="relative py-32 overflow-hidden bg-transparent section">
+    <section id="projects" className="relative py-20 lg:py-24 overflow-hidden bg-transparent section">
       <div className="container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="mb-24 text-center"
+          className="mb-16 lg:mb-24 text-center"
         >
-          <h2 className="text-5xl font-black text-white md:text-7xl">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white">
             Featured <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text">Works</span>
           </h2>
           <div className="w-24 h-1.5 mx-auto mt-6 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 opacity-50" />
         </motion.div>
 
-        <div className="grid gap-12 md:grid-cols-2 max-w-6xl mx-auto">
+        <div className="grid gap-8 lg:gap-12 md:grid-cols-2 max-w-6xl mx-auto">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
