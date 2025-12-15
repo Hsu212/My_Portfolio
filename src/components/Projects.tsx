@@ -1,152 +1,201 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, Info } from "lucide-react";
 
-const projects = [
-  { 
-    title: "PLATE.AI", 
-    desc: "A full-stack web application for real-time, high-accuracy detection and recognition of Vietnamese license plates, showcasing an end-to-end AI solution.", 
-    tags: ["JavaScript", "React", "Node.js", "FastAPI", "Python"], 
-    image: "https://github.com/Htet-2aung/PLATE.AI/raw/main/assets/Captura%20de%20pantalla%202025-06-09%20181711.png?raw=true", 
-    live: "https://plate-ai-theta.vercel.app/", 
-    github: "https://github.com/Hsu212/PLATE.AI" 
-  },
-  { 
-    title: "E-Commerce Website", 
-    desc: "Full-stack online store with Stripe & Prisma integration for seamless payments.", 
-    tags: ["React", "TypeScript", "CSS"], 
-    image: "https://github.com/Hsu212/My_Portfolio/blob/main/src/assets/SMHome.png?raw=true", 
-    live: "https://furniture-store-ecommerce-website.vercel.app/", 
-    github: "https://github.com/Hsu212/SMHome_Furniture_Store_Ecommerce_Website" 
-  },
-  { 
-    title: "Riverpod Testing To do list app", 
-    desc: "Modern admin panel with real-time charts, authentication, and user management.", 
-    tags: ["Dart", "Firebase"], 
-    image: "https://github.com/Htet-2aung/riverpod-testing-to-do-list-app/blob/main/localhost_56445_(iPhone%2012%20Pro)%20(1)%20(1).png?raw=true", 
-    live: "#", 
-    github: "https://github.com/Hsu212/riverpod-testing-to-do-list-app" 
-  },
-  { 
-    title: "AuraCycle Menstruation Tracker Website", 
-    desc: "Modern admin panel with real-time charts, authentication, and user management.", 
-    tags: ["TypeScript", "React", "CSS", "HTML"], 
-    image: "https://github.com/Hsu212/My_Portfolio/blob/main/AuraCycle.png?raw=true", 
-    live: "https://aura-cycle-menstraul-tracker.vercel.app/signin", 
-    github: "https://github.com/Hsu212/AuraCycle_Menstrual_Tracker" 
-  },
-  /*{ 
-    title: "Riverpod Testing To do list app", 
-    desc: "Modern admin panel with real-time charts, authentication, and user management.", 
-    tags: ["Next.js", "Tailwind", "Recharts", "Clerk"], 
-    image: "https://github.com/Htet-2aung/riverpod-testing-to-do-list-app/blob/main/localhost_56445_(iPhone%2012%20Pro)%20(1)%20(1).png?raw=true", 
-    live: "#", 
-    github: "https://github.com/Hsu212/riverpod-testing-to-do-list-app" 
-  },*/
-];
+// --- Ultra-Smooth 3D Flip Project Card Component ---
+function ProjectCard({ project }: { project: any }) {
+  const [isFlipped, setIsFlipped] = useState(false);
 
-const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.25 } } };
-const item = { hidden: { opacity: 0, y: 80, rotateX: -15 }, show: { opacity: 1, y: 0, rotateX: 0 } };
+  return (
+    <div 
+      className="relative h-[480px] w-full perspective-2000 cursor-pointer"
+      onMouseEnter={() => setIsFlipped(true)}
+      onMouseLeave={() => setIsFlipped(false)}
+      onClick={() => setIsFlipped(!isFlipped)} // Support for mobile tap
+    >
+      <motion.div
+        className="relative w-full h-full transition-all"
+        style={{ transformStyle: "preserve-3d" }}
+        animate={{ 
+          rotateY: isFlipped ? 180 : 0,
+          scale: isFlipped ? 1.02 : 1 
+        }}
+        transition={{ 
+          type: "spring", 
+          stiffness: 120, 
+          damping: 20, 
+          mass: 0.8 
+        }}
+      >
+        {/* FRONT SIDE */}
+        <div 
+          className="absolute inset-0 w-full h-full rounded-[2.5rem] overflow-hidden border border-white/10 bg-gray-900/20 backdrop-blur-md shadow-2xl"
+          style={{ backfaceVisibility: "hidden" }}
+        >
+          <div className="relative h-full">
+            <img
+              src={project.image}
+              alt={project.title}
+              className="object-cover w-full h-full opacity-70 transition-transform duration-700 group-hover:scale-105"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                target.parentElement!.classList.add('bg-gradient-to-br', 'from-gray-800', 'to-black');
+              }}
+            />
+            {/* Dynamic Shine overlay */}
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none"
+              animate={{ x: isFlipped ? 200 : -200 }}
+              transition={{ duration: 0.8 }}
+            />
+            
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+            
+            <div className="absolute bottom-10 left-10 right-10">
+              <motion.h3 
+                className="text-4xl font-black text-white mb-3 tracking-tight"
+                style={{ transform: "translateZ(50px)" }}
+              >
+                {project.title}
+              </motion.h3>
+              <div className="flex items-center gap-2 text-primary font-semibold tracking-wide uppercase text-xs">
+                <Info className="w-4 h-4" />
+                <span>Hover to Explore</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* BACK SIDE */}
+        <div 
+          className="absolute inset-0 w-full h-full rounded-[2.5rem] border-2 border-white/10 bg-[#0a0a0c] p-12 flex flex-col justify-between shadow-2xl"
+          style={{ 
+            backfaceVisibility: "hidden", 
+            transform: "rotateY(180deg)" 
+          }}
+        >
+          {/* Decorative Background Glow */}
+          <div className="absolute top-0 left-0 w-full h-full bg-primary/5 blur-3xl rounded-full -z-10" />
+
+          <div>
+            <h3 className="text-3xl font-black text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text mb-6">
+              {project.title}
+            </h3>
+            <p className="text-gray-400 text-lg leading-relaxed mb-8 font-medium">
+              {project.desc}
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {project.tags.map((tag: string) => (
+                <span key={tag} className="px-4 py-1.5 text-[11px] font-bold tracking-widest uppercase border border-white/5 rounded-xl bg-white/5 text-cyan-300">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between pt-8 border-t border-white/5">
+            <motion.a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05, x: 5 }}
+              whileTap={{ scale: 0.95 }}
+              className={`flex items-center gap-2 text-lg font-bold transition-all ${
+                project.live === "#" ? "opacity-20 cursor-not-allowed text-gray-500" : "text-primary hover:text-white"
+              }`}
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent flipping when clicking links
+                if (project.live === "#") e.preventDefault();
+              }}
+            >
+              <ExternalLink className="w-5 h-5" />
+              Live Demo
+            </motion.a>
+            <motion.a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05, x: -5 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-2 text-lg font-bold text-gray-500 hover:text-white transition-all"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Github className="w-5 h-5" />
+              Code
+            </motion.a>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
 
 export function Projects() {
+  const projects = [
+    { 
+      title: "PLATE.AI", 
+      desc: "A full-stack web application for real-time, high-accuracy detection and recognition of Vietnamese license plates, showcasing an end-to-end AI solution.", 
+      tags: ["JavaScript", "React", "Node.js", "FastAPI", "Python"], 
+      image: "https://github.com/Htet-2aung/PLATE.AI/raw/main/assets/Captura%20de%20pantalla%202025-06-09%20181711.png?raw=true", 
+      live: "https://plate-ai-theta.vercel.app/", 
+      github: "https://github.com/Hsu212/PLATE.AI" 
+    },
+    { 
+      title: "E-Commerce", 
+      desc: "Full-stack online store with Stripe & Prisma integration for seamless payments and premium furniture browsing experience.", 
+      tags: ["React", "TypeScript", "CSS", "Prisma"], 
+      image: "https://github.com/Hsu212/My_Portfolio/blob/main/src/assets/SMHome.png?raw=true", 
+      live: "https://furniture-store-ecommerce-website.vercel.app/", 
+      github: "https://github.com/Hsu212/SMHome_Furniture_Store_Ecommerce_Website" 
+    },
+    { 
+      title: "Riverpod Tasker", 
+      desc: "Modern task management application utilizing Riverpod for robust state management and Firebase for real-time data sync.", 
+      tags: ["Dart", "Firebase", "Riverpod"], 
+      image: "https://github.com/Htet-2aung/riverpod-testing-to-do-list-app/blob/main/localhost_56445_(iPhone%2012%20Pro)%20(1)%20(1).png?raw=true", 
+      live: "#", 
+      github: "https://github.com/Hsu212/riverpod-testing-to-do-list-app" 
+    },
+    { 
+      title: "AuraCycle", 
+      desc: "Health-focused web application for menstruation tracking with a clean, modern user interface built for reliability and privacy.", 
+      tags: ["TypeScript", "React", "Tailwind"], 
+      image: "https://github.com/Hsu212/My_Portfolio/blob/main/AuraCycle.png?raw=true", 
+      live: "https://aura-cycle-menstraul-tracker.vercel.app/signin", 
+      github: "https://github.com/Hsu212/AuraCycle_Menstrual_Tracker" 
+    },
+  ];
+
   return (
     <section id="projects" className="relative py-32 overflow-hidden bg-transparent section">
       <div className="container relative z-10">
-        <motion.h2
-          whileInView={{ opacity: 1, y: 0 }}
-          initial={{ opacity: 0, y: 60 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-24 text-5xl font-black text-center text-transparent md:text-7xl bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text"
-        >
-          Featured Projects
-        </motion.h2>
-
         <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="grid gap-12 md:grid-cols-2 lg:grid-cols-3"
+          transition={{ duration: 1 }}
+          className="mb-24 text-center"
         >
-          {projects.map((project) => (
+          <h2 className="text-5xl font-black text-white md:text-7xl">
+            Featured <span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text">Works</span>
+          </h2>
+          <div className="w-24 h-1.5 mx-auto mt-6 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 opacity-50" />
+        </motion.div>
+
+        <div className="grid gap-12 md:grid-cols-2 max-w-6xl mx-auto">
+          {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              variants={item}
-              whileHover={{ 
-                y: -20, 
-                rotateY: 5, 
-                rotateX: 2,
-                transition: { duration: 0.5 }
-              }}
-              className="relative group"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.8 }}
             >
-              <div className="relative p-1 overflow-hidden border rounded-3xl border-white/10 bg-white/5 backdrop-blur-2xl">
-                <div className="absolute inset-0 transition-opacity duration-700 opacity-0 rounded-3xl bg-gradient-to-r from-cyan-500/30 via-purple-500/30 to-pink-500/30 group-hover:opacity-100 blur-xl" />
-                
-                <div className="relative h-full transition-all duration-500 border shadow-2xl rounded-3xl bg-black/60 backdrop-blur-xl border-white/20">
-                  <div className="relative overflow-hidden bg-gray-800 aspect-video rounded-t-3xl">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="object-cover w-full h-full transition duration-1000 group-hover:scale-110"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        target.parentElement!.classList.add('bg-gradient-to-br', 'from-gray-700', 'to-gray-900');
-                      }}
-                    />
-                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  </div>
-
-                  <div className="p-8">
-                    <h3 className="mb-4 text-2xl font-bold text-transparent bg-gradient-to-r from-cyan-300 to-purple-300 bg-clip-text">
-                      {project.title}
-                    </h3>
-                    <p className="mb-6 text-sm text-gray-300 line-clamp-3">{project.desc}</p>
-
-                    <div className="flex flex-wrap gap-2 mb-8">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 text-xs font-medium border rounded-full bg-white/5 border-white/10 text-cyan-300"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="relative z-20 flex items-center justify-between pointer-events-auto">
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`flex items-center gap-2 text-sm font-medium transition-all ${
-                          project.live === "#" ? "opacity-50 cursor-not-allowed text-gray-500" : "text-cyan-400 hover:text-cyan-300 hover:scale-105"
-                        }`}
-                        onClick={(e) => project.live === "#" && e.preventDefault()}
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        Live Demo
-                      </a>
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`flex items-center gap-2 text-sm font-medium transition-all ${
-                          project.github === "#" ? "opacity-50 cursor-not-allowed text-gray-500" : "text-purple-400 hover:text-purple-300 hover:scale-105"
-                        }`}
-                        onClick={(e) => project.github === "#" && e.preventDefault()}
-                      >
-                        <Github className="w-4 h-4" />
-                        Source
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ProjectCard project={project} />
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
