@@ -120,7 +120,7 @@ export function DetailsOverlay({ onClose }: DetailsOverlayProps) {
             <div className="bg-gray-900/60 p-10 rounded-[3rem] border border-white/20 backdrop-blur-md flex flex-col justify-center shadow-2xl">
               <h4 className="text-2xl font-black text-white mb-6">Academic Background</h4>
               <p className="text-gray-200 text-lg leading-relaxed">
-                Currently a <span className="text-primary font-bold">final-year Computer Science</span> student. My education emphasizes software architecture, while my independent work focuses on <span className="text-secondary font-bold">Web development</span>.
+                Currently a <span className="text-primary font-bold">final-year Computer Science</span> student. My education emphasizes Machine Learning, Deep Learning, Object Detection, NLP, Speech Processing and Software Engineering with Flutter, while my independent work focuses on <span className="text-secondary font-bold">Web development</span>.
               </p>
             </div>
           </div>
