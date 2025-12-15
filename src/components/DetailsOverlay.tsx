@@ -108,7 +108,7 @@ export function DetailsOverlay({ onClose }: DetailsOverlayProps) {
               </div>
               
               <motion.a 
-                href="/cv.pdf" 
+                href="/Hsu Myat Wai Maung.pdf" 
                 download 
                 whileHover={{ scale: 1.02 }}
                 className="flex items-center justify-center gap-3 w-full py-5 bg-white text-gray-950 rounded-2xl font-black shadow-xl"
