@@ -1,7 +1,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import profileImg from "../assets/mypp.jpg"; 
-import hoverImg from "../assets/mypp.png"; // Replace with your actual second image path
+import hoverImg from "../assets/mypp.png"; 
 
 import { 
   FaHtml5, 
@@ -74,26 +74,26 @@ export function Hero() {
   };
 
   const floatingIcons = [
-    { Icon: FaHtml5, size: "text-5xl", position: "-top-12 -left-12", delay: 0 },
-    { Icon: FaCss3Alt, size: "text-4xl", position: "-top-16 right-0", delay: 0.5 },
-    { Icon: FaJsSquare, size: "text-5xl", position: "bottom-0 -left-20", delay: 1 },
-    { Icon: SiTypescript, size: "text-4xl", position: "-bottom-12 -right-12", delay: 1.5 },
-    { Icon: FaReact, size: "text-6xl", position: "top-1/4 -left-28", delay: 2 },
-    { Icon: SiNextdotjs, size: "text-5xl", position: "top-1/2 -right-24", delay: 2.5 },
-    { Icon: FaVuejs, size: "text-4xl", position: "bottom-1/4 -left-24", delay: 3 },
-    { Icon: FaNodeJs, size: "text-5xl", position: "-bottom-20 right-1/4", delay: 3.5 },
-    { Icon: SiTailwindcss, size: "text-5xl", position: "-top-24 left-1/2", delay: 4 },
+    { Icon: FaHtml5, size: "text-4xl lg:text-5xl", position: "-top-12 -left-12", delay: 0 },
+    { Icon: FaCss3Alt, size: "text-3xl lg:text-4xl", position: "-top-16 right-0", delay: 0.5 },
+    { Icon: FaJsSquare, size: "text-4xl lg:text-5xl", position: "bottom-0 -left-20", delay: 1 },
+    { Icon: SiTypescript, size: "text-3xl lg:text-4xl", position: "-bottom-12 -right-12", delay: 1.5 },
+    { Icon: FaReact, size: "text-5xl lg:text-6xl", position: "top-1/4 -left-28", delay: 2 },
+    { Icon: SiNextdotjs, size: "text-4xl lg:text-5xl", position: "top-1/2 -right-24", delay: 2.5 },
+    { Icon: FaVuejs, size: "text-3xl lg:text-4xl", position: "bottom-1/4 -left-24", delay: 3 },
+    { Icon: FaNodeJs, size: "text-4xl lg:text-5xl", position: "-bottom-20 right-1/4", delay: 3.5 },
+    { Icon: SiTailwindcss, size: "text-4xl lg:text-5xl", position: "-top-24 left-1/2", delay: 4 },
   ];
 
   return (
-    <section className="relative flex items-center justify-center min-h-screen bg-transparent">
+    <section className="relative flex items-center justify-center min-h-screen bg-transparent overflow-hidden py-20 lg:py-0">
       <div className="relative z-10 w-full px-6 mx-auto max-w-7xl">
-        <div className="grid items-center gap-12 md:grid-cols-2 lg:gap-20">
+        <div className="grid items-center gap-8 md:grid-cols-2 lg:gap-16">
           
-          <div className="max-w-xl text-left">
+          <div className="max-w-xl text-left order-last md:order-first">
             <motion.div initial="hidden" animate="visible" variants={nameContainer} className="mb-4">
-              <h2 className="mb-2 text-xl font-medium text-primary">Hi, I'm</h2>
-              <h1 className="text-5xl font-black tracking-tight select-none md:text-6xl lg:text-7xl whitespace-nowrap">
+              <h2 className="mb-2 text-lg md:text-xl font-medium text-primary">Hi, I'm</h2>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight select-none whitespace-normal lg:whitespace-nowrap leading-tight">
                 <span className="relative inline-block">
                   <span className="relative z-10 text-transparent bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text">
                     {name.split("").map((letter, i) => (
@@ -126,7 +126,7 @@ export function Hero() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1.5 }}
-              className="mb-10 text-base font-medium tracking-wide text-gray-400 select-none md:text-lg"
+              className="mb-8 text-sm sm:text-base lg:text-lg font-medium tracking-wide text-gray-400 select-none"
             >
               Full-Stack Developer • Crafting immersive digital experiences
             </motion.p>
@@ -137,7 +137,7 @@ export function Hero() {
               transition={{ delay: 1.8, duration: 0.8 }}
               className="flex justify-center md:justify-start"
             >
-              <a href="#projects" className="relative inline-flex items-center px-8 py-4 overflow-hidden text-lg font-semibold bg-white rounded-full group dark:bg-gray-950">
+              <a href="#projects" className="relative inline-flex items-center px-6 py-3 lg:px-8 lg:py-4 overflow-hidden text-base lg:text-lg font-semibold bg-white rounded-full group dark:bg-gray-950">
                 <span className="absolute inset-0 rounded-full p-[3px] overflow-hidden">
                   <span className="absolute inset-0 rounded-full bg-conic-gradient animate-rotate-conic" />
                 </span>
@@ -150,13 +150,13 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* REFINED 3D "EMERGING" EFFECT */}
+          {/* Image Section */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8, x: 100 }}
             whileInView={{ opacity: 1, scale: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="flex justify-center order-first md:justify-end md:order-last"
+            className="flex justify-center md:justify-end"
           >
             <motion.div 
               className="relative z-30"
@@ -170,7 +170,6 @@ export function Hero() {
                 perspective: "1000px"
               }}
             >
-              {/* First Image (The Base) */}
               <motion.img
                 src={profileImg}
                 alt="Profile Base"
@@ -179,10 +178,9 @@ export function Hero() {
                   opacity: isHovered ? 0.3 : 1,
                   scale: isHovered ? 0.95 : 1
                 }}
-                className="relative z-10 object-cover w-64 h-64 border-4 rounded-full shadow-2xl sm:w-72 sm:h-72 md:w-96 md:h-96 border-white/20"
+                className="relative z-10 object-cover w-56 h-56 border-4 rounded-full shadow-2xl md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 border-white/20"
               />
 
-              {/* Second Image (The one that "comes out") */}
               <motion.img
                 src={hoverImg}
                 alt="Profile Emerging"
@@ -197,7 +195,7 @@ export function Hero() {
                   stiffness: 200, 
                   damping: 15 
                 }}
-                className="absolute inset-0 z-20 object-cover w-64 h-64 border-4 rounded-full shadow-2xl sm:w-72 sm:h-72 md:w-96 md:h-96 border-white/20"
+                className="absolute inset-0 z-20 object-cover w-56 h-56 border-4 rounded-full shadow-2xl md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 border-white/20"
               />
 
               {floatingIcons.map(({ Icon, size, position, delay }, index) => (
@@ -215,7 +213,7 @@ export function Hero() {
                     rotate: { duration: 8, repeat: Infinity, ease: "linear", delay },
                   }}
                   whileHover={{ scale: 1.4, rotate: 15, color: "#8b5cf6" }}
-                  style={{ transform: "translateZ(80px)" }} // Icons float even further out
+                  style={{ transform: "translateZ(80px)" }}
                 >
                   {Icon && <Icon />} 
                 </motion.div>
