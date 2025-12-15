@@ -9,7 +9,7 @@ export function DetailsOverlay({ onClose }: DetailsOverlayProps) {
   // 1. Project Categories
   const universityProjects = [
     { 
-      title: "Riverpod Tasker", 
+      title: "Riverpod To Do List", 
       desc: "Academic project focused on state management architecture and Firebase integration.",
       tags: ["Dart", "Firebase", "Riverpod"],
       github: "https://github.com/Hsu212/riverpod-testing-to-do-list-app"
@@ -31,13 +31,19 @@ export function DetailsOverlay({ onClose }: DetailsOverlayProps) {
 
   const selfProjects = [
     { 
-      title: "AuraCycle", 
-      desc: "A health-tech menstruation tracker",
-      tags: ["TypeScript", "React", "Tailwind"],
+      title: "Free2Learn E-Learning System", 
+      desc: "A Free Online Language Learning Website",
+      tags: ["JavaScript", "Vue", "HTML", "CSS"],
       github: "https://github.com/Hsu212/AuraCycle_Menstrual_Tracker"
     },
     { 
-      title: "E-Commerce System", 
+      title: "AuraCycle", 
+      desc: "A health-tech menstruation tracker",
+      tags: ["TypeScript", "React"],
+      github: "https://github.com/Hsu212/AuraCycle_Menstrual_Tracker"
+    },
+    { 
+      title: "SM Home E-Commerce Website", 
       desc: "A furniture store website(user panel)",
       tags: ["TypeScript", "React"],
       github: "https://github.com/Hsu212/SMHome_Furniture_Store_Ecommerce_Website"
