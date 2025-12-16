@@ -152,7 +152,7 @@ export function Projects() {
       desc: "Free Online Learning Website For Languages", 
       tags: ["Vue", "JavaScript", "HTML", "CSS"], 
       image: "https://github.com/Hsu212/Free2Learn_E-Learning_System/blob/main/public/F2L.png?raw=true", 
-      live: "https://freeto2learn.netlify.app/", 
+      live: "https://free2-learn-e-learning-system.vercel.app/", 
       github: "https://github.com/Hsu212/Free2Learn_E-Learning_System" 
     },
     { 
