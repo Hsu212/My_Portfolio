@@ -34,7 +34,7 @@ export function DetailsOverlay({ onClose }: DetailsOverlayProps) {
       title: "Free2Learn E-Learning System", 
       desc: "A Free Online Language Learning Website",
       tags: ["JavaScript", "Vue", "HTML", "CSS"],
-      github: "https://free2-learn-e-learning-system.vercel.app/"
+      github: "https://github.com/Hsu212/Free2Learn_E-Learning_System"
     },
     { 
       title: "AuraCycle", 
