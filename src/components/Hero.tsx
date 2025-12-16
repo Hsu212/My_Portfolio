@@ -128,7 +128,7 @@ export function Hero() {
               transition={{ delay: 1.5 }}
               className="mb-8 text-sm sm:text-base lg:text-lg font-medium tracking-wide text-gray-400 select-none"
             >
-              Full-Stack Developer • Crafting immersive digital experiences
+              Frontend Web Developer • Crafting immersive digital experiences
             </motion.p>
 
             <motion.div
@@ -227,3 +227,4 @@ export function Hero() {
     </section>
   );
 }
+
